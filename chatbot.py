@@ -2,6 +2,7 @@ import json
 import numpy as np
 import datetime
 import pickle
+import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -29,7 +30,6 @@ def train_model(intents, model_filename="chatbot_model.pkl", vectorizer_filename
 
     # Transformar os padrões em vetores numéricos
     vectorizer = TfidfVectorizer(tokenizer=custom_tokenizer, stop_words='english', ngram_range=(1, 2))
-    #vectorizer = TfidfVectorizer(tokenizer=custom_tokenizer, stop_words='english')
     X = vectorizer.fit_transform(patterns).toarray()
 
     # Codificar as tags
@@ -40,11 +40,7 @@ def train_model(intents, model_filename="chatbot_model.pkl", vectorizer_filename
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Criar e treinar o modelo SVM
-    #model = SVC(kernel='linear', probability=True)
-    #model = SVC(kernel='linear', C=1.4, probability=True)
     model = SVC(kernel='linear', C=1.5, probability=True)
-
-
     model.fit(X_train, y_train)
 
     # Avaliar o modelo
@@ -81,6 +77,14 @@ def comando_data():
 def comando_clima():
     return "Hoje vai chover"
 
+# Função para extrair parâmetros da mensagem do usuário
+def extract_parameters(text):
+    # Regex para capturar o nome de um artista ou música com verbos variados
+    match = re.search(r'(tocar|reproduzir|buscar|encontrar|pesquisar|reproduza|toque|pesquise|busque)\s(.+)', text, re.IGNORECASE)
+    if match:
+        return match.group(2).strip()
+    return None
+
 # Função para prever a classe/tag da entrada do usuário
 def predict_class(text, model, vectorizer, label_encoder):
     text_vector = vectorizer.transform([text]).toarray()
@@ -88,13 +92,15 @@ def predict_class(text, model, vectorizer, label_encoder):
     return label_encoder.inverse_transform([predicted_tag])[0]
 
 # Função para obter a resposta com base na tag prevista
-def get_response(intents, tag):
+def get_response(intents, tag, parameter=None):
     if tag == "hora":
         return comando_hora()
     elif tag == "data":
         return comando_data()
     elif tag == "clima":
         return comando_clima()
+    elif tag == "reproduzir_musica" and parameter:
+        return f"Comando reproduzir música para {parameter}"
     else:
         for intent in intents['intents']:
             if intent['tag'] == tag:
@@ -106,12 +112,19 @@ def chat(intents, model, vectorizer, label_encoder):
         input_text = input("Você: ")
         if input_text.lower() == "sair":
             break
+        
+        # Extrair parâmetros da mensagem do usuário
+        parameter = extract_parameters(input_text)
+        
+        # Prever a tag da mensagem
         predicted_tag = predict_class(input_text, model, vectorizer, label_encoder)
-        response = get_response(intents, predicted_tag)
+        
+        # Obter a resposta com base na tag e no parâmetro (se houver)
+        response = get_response(intents, predicted_tag, parameter)
+        
         print(f"Bot: {response}")
 
-
-
+# Treinamento ou carregamento do modelo
 treinar = True
 treinar = False
 
@@ -122,4 +135,3 @@ else:
     intents = load_intents('intents.json')
     model, vectorizer, label_encoder = load_model()
     chat(intents, model, vectorizer, label_encoder)
-
