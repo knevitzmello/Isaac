@@ -1,0 +1,110 @@
+{
+    "intents": [
+        {
+            "tag": "saudacoes",
+            "patterns": ["olá", "oi", "bom dia", "boa tarde", "boa noite", "e aí", "salve", "como vai", "tudo bem?", "olá, como você está?"],
+            "responses": ["Olá!", "O que posso fazer por você?", "Oi! Como posso te ajudar?", "Saudações!", "Olá! Tudo bem?", "Oi, como você está?", "Olá! Como posso ser útil hoje?"]
+        },
+        {
+            "tag": "nome",
+            "patterns": ["qual é o seu nome", "como você se chama", "como devo te chamar", "quem é você?", "qual o seu nome?", "você tem um nome?", "como posso te chamar?", "como você é chamado?", "qual é seu nome de verdade?", "você tem algum nome?"],
+            "responses": ["Eu sou o seu assistente virtual.", "Pode me chamar de Assistente.", "Meu nome é Assistente Virtual.", "Eu sou o GPT, seu assistente!", "Chame-me como quiser, estou aqui para ajudar.", "Meu nome é o que você quiser que seja!", "Eu sou apenas um assistente, mas você pode me chamar de amigo."]
+        },
+        {
+            "tag": "clima_hoje",
+            "patterns": [
+                "como está o clima hoje?", 
+                "qual é a previsão do tempo para hoje?", 
+                "vai chover hoje?", 
+                "como está o tempo hoje?", 
+                "me diga o clima de hoje", 
+                "vai fazer sol hoje?", 
+                "qual é a temperatura hoje?", 
+                "qual é a previsão para hoje?",
+                "hoje vai fazer calor?",
+                "hoje vai estar quente?",
+                "vai esfriar hoje?",
+                "qual é a mínima e máxima de hoje?",
+                "qual a sensação térmica de hoje?",
+                "será que hoje vai fazer sol?",
+                "vai ventar muito hoje?"
+            ],
+            "responses": ["Comando para clima de hoje"]
+        },
+        {
+            "tag": "clima_amanha",
+            "patterns": [
+                "qual é a previsão do tempo para amanhã?", 
+                "vai chover amanhã?", 
+                "como estará o tempo amanhã?", 
+                "qual será a temperatura amanhã?", 
+                "me diga o clima de amanhã", 
+                "vai fazer sol amanhã?", 
+                "qual é a previsão para amanhã?",
+                "amanhã vai fazer calor?",
+                "amanhã vai estar quente?",
+                "vai esfriar amanhã?",
+                "qual é a mínima e máxima de amanhã?",
+                "qual será a sensação térmica amanhã?",
+                "será que amanhã vai fazer sol?",
+                "vai ventar muito amanhã?"
+            ],
+            "responses": ["Comando para clima de amanhã"]
+        },
+        {
+            "tag": "clima_depois_de_amanha",
+            "patterns": [
+                "qual é a previsão do tempo para depois de amanhã?", 
+                "vai chover depois de amanhã?", 
+                "como estará o tempo depois de amanhã?", 
+                "qual será a temperatura depois de amanhã?", 
+                "me diga o clima de depois de amanhã", 
+                "vai fazer sol depois de amanhã?", 
+                "qual é a previsão para depois de amanhã?",
+                "depois de amanhã vai fazer calor?",
+                "depois de amanhã vai estar quente?",
+                "vai esfriar depois de amanhã?",
+                "qual é a mínima e máxima de depois de amanhã?",
+                "qual será a sensação térmica depois de amanhã?",
+                "será que depois de amanhã vai fazer sol?",
+                "vai ventar muito depois de amanhã?"
+            ],
+            "responses": ["Comando para clima de depois de amanhã"]
+        },
+        {
+            "tag": "data",
+            "patterns": ["qual é a data de hoje?", "que dia é hoje?", "qual é a data atual?", "qual o dia de hoje?", "qual a data de agora?", "me diga a data de hoje", "que dia estamos?", "pode me dizer a data de hoje?", "qual é o dia de hoje?", "qual é a data de hoje?"],
+            "responses": ["Comando 2"]
+        },
+        {
+            "tag": "hora",
+            "patterns": ["que horas são?", "me diga as horas", "qual é a hora?", "qual o horário atual?", "pode me dizer as horas?", "que horas são agora?", "qual é a hora certa?", "pode me dizer que horas são?", "me informe a hora atual", "qual o horário?"],
+            "responses": ["Comando 1"]
+        },
+        {
+            "tag": "reproduzir_musica",
+            "patterns": [
+                "reproduzir música", 
+                "tocar música", 
+                "quero ouvir música", 
+                "toque uma música", 
+                "reproduza uma música", 
+                "tocar artista X", 
+                "reproduzir música de Y", 
+                "quero ouvir música de Z",
+                "tocar [artista]", 
+                "quero ouvir [artista]", 
+                "toque músicas do [artista]",
+                "quero escutar [artista]",
+                "coloque uma música do [artista]",
+                "toque algo do [artista]"
+            ],
+            "responses": ["Reproduzindo música...", "Tocando sua música agora...", "Vamos ouvir música!", "Reproduzindo música de {artista}..."]
+        },
+        {
+            "tag": "nao_entendi",
+            "patterns": ["desconhecido"],
+            "responses": ["Não entendi o comando"]
+        }
+    ]
+}
